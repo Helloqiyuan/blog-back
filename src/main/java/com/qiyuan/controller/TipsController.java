@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/tips")
 @Slf4j
@@ -52,5 +54,15 @@ public class TipsController {
         log.info("更新提示:{}", tips);
         tipsService.updateTips(tips);
         return Result.success();
+    }
+
+    /**
+     * 随机获取count条小提示
+     */
+    @GetMapping("/random")
+    public Result getRandomTips(@RequestParam Integer count) {
+        log.info("获取{}条小提示",count);
+        List<Tips> tips = tipsService.getRandomTips(count);
+        return Result.success(tips);
     }
 }

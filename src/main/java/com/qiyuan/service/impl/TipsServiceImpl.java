@@ -5,10 +5,15 @@ import com.qiyuan.exception.TipsException;
 import com.qiyuan.mapper.TipsMapper;
 import com.qiyuan.pojo.Tips;
 import com.qiyuan.service.TipsService;
+import com.qiyuan.utils.MathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Service
 public class TipsServiceImpl implements TipsService {
@@ -47,5 +52,21 @@ public class TipsServiceImpl implements TipsService {
         if (i == 0) {
             throw new TipsException(TipsConstant.CAN_NOT_UPDATE_NOT_EXIST_TIPS);
         }
+    }
+
+    @Override
+    public List<Tips> getRandomTips(Integer count) {
+        List<Tips> res = new ArrayList<>();
+        List<Tips> allTips = getAllTips();
+        Set<Integer> ids = new HashSet<>();
+        while(ids.size() < count){
+            ids.add(MathUtil.getRandomInt(0,allTips.size() - 1));
+        }
+        ids.forEach(id -> res.add(allTips.get(id)));
+        return res;
+    }
+
+    private List< Tips> getAllTips(){
+        return tipsMapper.getAllTips();
     }
 }

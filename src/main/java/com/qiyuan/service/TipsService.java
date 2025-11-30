@@ -2,6 +2,8 @@ package com.qiyuan.service;
 
 import com.qiyuan.pojo.Tips;
 
+import java.util.List;
+
 public interface TipsService {
     void insertTips(Tips tips);
 
@@ -10,4 +12,6 @@ public interface TipsService {
     Tips getTipsById(Integer id);
 
     void updateTips(Tips tips);
+
+    List<Tips> getRandomTips(Integer count);
 }

@@ -38,4 +38,9 @@
         </if>
         where id = #{id}
     </update>
+
+    <select id="getAllTips" resultType="com.qiyuan.pojo.Tips">
+        select *
+        from tips
+    </select>
 </mapper>

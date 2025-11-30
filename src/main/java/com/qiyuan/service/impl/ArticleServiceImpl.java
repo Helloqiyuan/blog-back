@@ -3,7 +3,7 @@ package com.qiyuan.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.qiyuan.constant.ArticleConstant;
-import com.qiyuan.dto.pageQuery;
+import com.qiyuan.dto.pageQueryDTO;
 import com.qiyuan.exception.ArticleException;
 import com.qiyuan.mapper.ArticleMapper;
 import com.qiyuan.pojo.Article;
@@ -56,8 +56,8 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public PageResult<Article> pageQuery(pageQuery pageQuery) {
-        PageHelper.startPage(pageQuery.getPage(), pageQuery.getPageSize());
+    public PageResult<Article> pageQuery(pageQueryDTO pageQueryDTO) {
+        PageHelper.startPage(pageQueryDTO.getPage(), pageQueryDTO.getPageSize());
         Page<Article> p = articleMapper.pageQuery();
         return new PageResult<>(p.getTotal(), p.getResult());
     }

@@ -1,15 +1,33 @@
 spring:
   application:
     name: blog-back
-  datasource:
-    url: jdbc:mysql://localhost:3306/blog?useSSL=false&serverTimezone=Asia/Shanghai&useLegacyDatetimeCode=false&characterEncoding=utf8
-    username: root
-    password: QQ666666
-    driver-class-name: com.mysql.cj.jdbc.Driver
 
-#mybatis驼峰匹配
+  profiles:
+    active: dev  # 默认使用 dev 配置
+
+  datasource:
+    url: ${production.datasource.url}
+    username: ${production.datasource.username}
+    password: ${production.datasource.password}
+    driver-class-name: ${production.datasource.datasource.driver-class-name}
+
+  servlet:
+    multipart:
+      max-file-size: ${production.servlet.multipart.max-file-size}
+      max-request-size: ${production.servlet.multipart.max-request-size}
+
+# mybatis 公共配置
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# OSS 公共配置，占位引用 dev
+blog:
+  oss:
+    endpoint: ${production.oss.endpoint}
+    bucket-name: ${production.oss.bucket-name}
+    region: ${production.oss.region}
+    oss-access-key-id: ${production.oss.oss-access-key-id}
+    oss-access-key-secret: ${production.oss.oss-access-key-secret}

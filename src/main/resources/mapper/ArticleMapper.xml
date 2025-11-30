@@ -44,7 +44,7 @@
         where id = #{id}
     </select>
 
-    <select id="pageQuery" resultType="com.qiyuan.pojo.Article">
+    <select id="pageQueryDTO" resultType="com.qiyuan.pojo.Article">
         select *
         from article
     </select>

@@ -1,6 +1,6 @@
 package com.qiyuan.controller;
 
-import com.qiyuan.dto.pageQuery;
+import com.qiyuan.dto.pageQueryDTO;
 import com.qiyuan.pojo.Article;
 import com.qiyuan.vo.PageResult;
 import com.qiyuan.pojo.Result;
@@ -57,9 +57,9 @@ public class ArticleController {
      * 分页查询文章
      * */
     @GetMapping("/page")
-    public Result getArticleByPage(pageQuery pageQuery){
-        log.info("分页查询文章:{}",pageQuery);
-        PageResult<Article> articles = articleService.pageQuery(pageQuery);
+    public Result getArticleByPage(pageQueryDTO pageQueryDTO){
+        log.info("分页查询文章:{}", pageQueryDTO);
+        PageResult<Article> articles = articleService.pageQuery(pageQueryDTO);
         return Result.success(articles);
     }
 }
