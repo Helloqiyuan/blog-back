@@ -19,6 +19,7 @@ public class Admin implements Serializable {
     private Boolean status;
     private String avatar;
     private String email;
+    private Boolean superAdmin;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime lastLoginTime;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")

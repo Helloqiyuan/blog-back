@@ -26,4 +26,31 @@
         from admin
         where create_time = #{createTime}
     </select>
+    <update id="updateAdmin">
+        update admin
+        set
+        <if test="account != null">
+            account = #{account},
+        </if>
+        <if test="password != null">
+            password = #{password},
+        </if>
+        <if test="nickname != null">
+            nickname = #{nickname},
+        </if>
+        <if test="status != null">
+            status = #{status},
+        </if>
+        <if test="avatar != null">
+            avatar = #{avatar},
+        </if>
+        <if test="email != null">
+            email = #{email},
+        </if>
+        <if test="superAdmin != null">
+            super_admin = #{superAdmin},
+        </if>
+        update_time = #{updateTime}
+        where id = #{id}
+    </update>
 </mapper>

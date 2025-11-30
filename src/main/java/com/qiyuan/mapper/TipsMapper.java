@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface TipsMapper {
     void insertTips(Tips tips);
-    void deleteTipsById(Integer id);
+    Integer deleteTipsById(Integer id);
     Tips getTipsById(Integer id);
-    void updateTips(Tips tips);
+    Integer updateTips(Tips tips);
 }

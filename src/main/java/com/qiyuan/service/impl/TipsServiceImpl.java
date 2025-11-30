@@ -1,5 +1,7 @@
 package com.qiyuan.service.impl;
 
+import com.qiyuan.constant.TipsConstant;
+import com.qiyuan.exception.TipsException;
 import com.qiyuan.mapper.TipsMapper;
 import com.qiyuan.pojo.Tips;
 import com.qiyuan.service.TipsService;
@@ -23,17 +25,27 @@ public class TipsServiceImpl implements TipsService {
 
     @Override
     public void deleteTips(Integer id) {
-        tipsMapper.deleteTipsById(id);
+        Integer i = tipsMapper.deleteTipsById(id);
+        if (i == 0) {
+            throw new TipsException(TipsConstant.CAN_NOT_DELETE_NOT_EXIST_TIPS);
+        }
     }
 
     @Override
     public Tips getTipsById(Integer id) {
-        return tipsMapper.getTipsById(id);
+        Tips tips = tipsMapper.getTipsById(id);
+        if (tips == null) {
+            throw new TipsException(TipsConstant.TIPS_NOT_EXIST);
+        }
+        return tips;
     }
 
     @Override
     public void updateTips(Tips tips) {
         tips.setUpdateTime(LocalDateTime.now());
-        tipsMapper.updateTips(tips);
+        Integer i = tipsMapper.updateTips(tips);
+        if (i == 0) {
+            throw new TipsException(TipsConstant.CAN_NOT_UPDATE_NOT_EXIST_TIPS);
+        }
     }
 }

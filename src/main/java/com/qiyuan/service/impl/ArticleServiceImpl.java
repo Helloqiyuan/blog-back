@@ -2,7 +2,9 @@ package com.qiyuan.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.qiyuan.constant.ArticleConstant;
 import com.qiyuan.dto.pageQuery;
+import com.qiyuan.exception.ArticleException;
 import com.qiyuan.mapper.ArticleMapper;
 import com.qiyuan.pojo.Article;
 import com.qiyuan.vo.PageResult;
@@ -16,6 +18,7 @@ import java.time.LocalDateTime;
 public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ArticleMapper articleMapper;
+
     @Override
     public void insertArticle(Article article) {
         article.setAuthorId(1);
@@ -28,18 +31,28 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public void deleteArticleById(Integer id) {
-        articleMapper.deleteArticleById(id);
+        Integer i = articleMapper.deleteArticleById(id);
+        if (i == 0) {
+            throw new ArticleException(ArticleConstant.CAN_NOT_DELETE_NOT_EXIST_ARTICLE);
+        }
     }
 
     @Override
     public void updateArticle(Article article) {
         article.setUpdateTime(LocalDateTime.now());
-        articleMapper.updateArticle(article);
+        Integer i = articleMapper.updateArticle(article);
+        if (i == 0) {
+            throw new ArticleException(ArticleConstant.CAN_NOT_UPDATE_NOT_EXIST_ARTICLE);
+        }
     }
 
     @Override
     public Article getArticleById(Integer id) {
-        return articleMapper.getArticleById(id);
+        Article article =  articleMapper.getArticleById(id);
+        if (article == null) {
+            throw new ArticleException(ArticleConstant.ARTICLE_NOT_EXIST);
+        }
+        return article;
     }
 
     @Override

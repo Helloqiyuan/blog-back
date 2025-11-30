@@ -13,7 +13,9 @@ public interface AdminMapper {
 
     void insertAdmin(Admin admin);
 
-    void deleteAdminById(Integer id);
+    Integer deleteAdminById(Integer id);
 
     Admin getAdminByCreateTime(LocalDateTime createTime);
+
+    Integer updateAdmin(Admin admin);
 }

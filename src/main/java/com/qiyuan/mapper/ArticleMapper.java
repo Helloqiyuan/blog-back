@@ -7,8 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ArticleMapper {
     void insertArticle(Article article);
-    void deleteArticleById(Integer id);
-    void updateArticle(Article article);
+    Integer deleteArticleById(Integer id);
+    Integer updateArticle(Article article);
     Article getArticleById(Integer id);
     Page<Article> pageQuery();
 

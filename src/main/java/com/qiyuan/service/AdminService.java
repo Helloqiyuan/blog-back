@@ -13,4 +13,6 @@ public interface AdminService {
     void deleteAdminById(Integer id);
 
     Admin getAdminByCreateTime(LocalDateTime createTime);
+
+    void updateAdmin(Admin admin);
 }

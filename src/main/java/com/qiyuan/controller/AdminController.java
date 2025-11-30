@@ -55,4 +55,13 @@ public class AdminController {
         Admin admin = adminService.getAdminByCreateTime(createTime);
         return Result.success(admin);
     }
+    /**
+     * 更新管理员
+     * */
+    @PutMapping
+    public Result updateAdmin(@RequestBody Admin admin){
+        log.info("更新管理员:{}",admin);
+        adminService.updateAdmin(admin);
+        return Result.success();
+    }
 }

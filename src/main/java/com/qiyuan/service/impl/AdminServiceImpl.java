@@ -1,5 +1,7 @@
 package com.qiyuan.service.impl;
 
+import com.qiyuan.constant.AdminConstant;
+import com.qiyuan.exception.AdminException;
 import com.qiyuan.mapper.AdminMapper;
 import com.qiyuan.pojo.Admin;
 import com.qiyuan.service.AdminService;
@@ -15,12 +17,16 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public Admin getAdminById(Integer AdminId) {
-        return adminMapper.getAdminById(AdminId);
+        Admin admin = adminMapper.getAdminById(AdminId);
+        if (admin == null) {
+            throw new AdminException(AdminConstant.ADMIN_NOT_EXIST);
+        }
+        return admin;
     }
 
     @Override
     public void insertAdmin(Admin admin) {
-        if (admin.getLastLoginTime() == null) admin.setLastLoginTime(LocalDateTime.now());
+        admin.setLastLoginTime(LocalDateTime.now());
         admin.setUpdateTime(LocalDateTime.now());
         admin.setCreateTime(LocalDateTime.now());
         adminMapper.insertAdmin(admin);
@@ -28,11 +34,26 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public void deleteAdminById(Integer id) {
-        adminMapper.deleteAdminById(id);
+        Integer i = adminMapper.deleteAdminById(id);
+        if (i == 0) {
+            throw new AdminException(AdminConstant.CAN_NOT_DELETE_NOT_EXIST_ADMIN);
+        }
     }
 
     @Override
     public Admin getAdminByCreateTime(LocalDateTime createTime) {
-        return adminMapper.getAdminByCreateTime(createTime);
+        Admin admin = adminMapper.getAdminByCreateTime(createTime);
+        if (admin == null) {
+            throw new AdminException(AdminConstant.ADMIN_NOT_EXIST);
+        }
+        return admin;
+    }
+
+    @Override
+    public void updateAdmin(Admin admin) {
+        Integer i = adminMapper.updateAdmin(admin);
+        if (i == 0) {
+            throw new AdminException(AdminConstant.CAN_NOT_UPDATE_NOT_EXIST_ADMIN);
+        }
     }
 }
