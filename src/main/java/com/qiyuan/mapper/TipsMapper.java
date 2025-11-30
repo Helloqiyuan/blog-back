@@ -1,0 +1,12 @@
+package com.qiyuan.mapper;
+
+import com.qiyuan.pojo.Tips;
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
+public interface TipsMapper {
+    void insertTips(Tips tips);
+    void deleteTipsById(Integer id);
+    Tips getTipsById(Integer id);
+    void updateTips(Tips tips);
+}

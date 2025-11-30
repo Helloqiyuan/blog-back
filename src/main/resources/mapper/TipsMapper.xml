@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiyuan.mapper.TipsMapper">
+
+    <insert id="insertTips">
+        insert into tips(content, priority, status, update_time, create_time)
+        values (#{content}, #{priority}, #{status}, #{updateTime}, #{createTime})
+    </insert>
+
+    <delete id="deleteTipsById">
+        delete
+        from tips
+        where id = #{id}
+    </delete>
+
+    <select id="getTipsById" resultType="com.qiyuan.pojo.Tips">
+        select *
+        from tips
+        where id = #{id}
+    </select>
+
+    <update id="updateTips">
+        update tips
+        set
+        <if test="content != null">
+            content = #{content},
+        </if>
+        <if test="priority != null">
+            priority = #{priority},
+        </if>
+        <if test="status != null">
+            status = #{status},
+        </if>
+        <if test="updateTime != null">
+            update_time = #{updateTime}
+        </if>
+        where id = #{id}
+    </update>
+</mapper>
