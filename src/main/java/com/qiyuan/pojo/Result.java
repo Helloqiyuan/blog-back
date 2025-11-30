@@ -1,7 +1,9 @@
 package com.qiyuan.pojo;
 
 import lombok.Data;
-
+/**
+ * 结果
+ * */
 @Data
 public class Result {
     private Integer code;

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiyuan.mapper.ArticleMapper">
+    <insert id="insertArticle">
+        insert into article(title,content,author_id,status,view_count,update_time,create_time)
+        values(#{title},#{content},#{authorId},#{status},#{viewCount},#{updateTime},#{createTime})
+    </insert>
+
+    <delete id="deleteArticleById">
+        delete
+        from article
+        where id = #{id}
+    </delete>
+
+    <update id="updateArticle">
+        update article
+        set
+        <if test="title != null">
+            title = #{title},
+        </if>
+        <if test="content != null">
+            content = #{content},
+        </if>
+        <if test="authorId != null">
+            author_id = #{authorId},
+        </if>
+        <if test="status != null">
+            status = #{status},
+        </if>
+        <if test="viewCount != null">
+            view_count = #{viewCount},
+        </if>
+        <if test="updateTime != null">
+            update_time = #{updateTime}
+        </if>
+        where id = #{id}
+    </update>
+
+    <select id="getArticleById" resultType="com.qiyuan.pojo.Article">
+        select *
+        from article
+        where id = #{id}
+    </select>
+
+    <select id="pageQuery" resultType="com.qiyuan.pojo.Article">
+        select *
+        from article
+    </select>
+</mapper>
