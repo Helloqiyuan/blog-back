@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: blog-back
+  datasource:
+    url: jdbc:mysql://localhost:3306/blog?useSSL=false&serverTimezone=Asia/Shanghai&useLegacyDatetimeCode=false&characterEncoding=utf8
+    username: root
+    password: QQ666666
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+#mybatis驼峰匹配
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
