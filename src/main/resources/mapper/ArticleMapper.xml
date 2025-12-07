@@ -4,8 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qiyuan.mapper.ArticleMapper">
     <insert id="insertArticle">
-        insert into article(title,content,author_id,status,view_count,update_time,create_time)
-        values(#{title},#{content},#{authorId},#{status},#{viewCount},#{updateTime},#{createTime})
+        insert into article(title,sub_title,content,cover,author_id,status,view_count,update_time,create_time)
+        values(#{title},#{subTitle},#{content},#{cover},#{authorId},#{status},#{viewCount},#{updateTime},#{createTime})
     </insert>
 
     <delete id="deleteArticleById">
@@ -20,8 +20,14 @@
         <if test="title != null">
             title = #{title},
         </if>
+        <if test="subTitle !=null">
+            sub_title = #{subTitle},
+        </if>
         <if test="content != null">
             content = #{content},
+        </if>
+        <if test="cover != null">
+            cover = #{cover},
         </if>
         <if test="authorId != null">
             author_id = #{authorId},
@@ -47,5 +53,16 @@
     <select id="pageQueryDTO" resultType="com.qiyuan.pojo.Article">
         select *
         from article
+    </select>
+    <select id="pageQuery" resultType="com.qiyuan.pojo.Article">
+        select *
+        from article
+        <where>
+            <if test="searchContent != null">
+                title like concat('%',#{searchContent},'%') or
+                sub_title like concat('%',#{searchContent},'%') or
+                content like concat('%',#{searchContent},'%')
+            </if>
+        </where>
     </select>
 </mapper>

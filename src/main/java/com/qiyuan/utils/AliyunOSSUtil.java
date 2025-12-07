@@ -23,7 +23,7 @@ public class AliyunOSSUtil {
     @Autowired
     private AliyunSecretProperty aliyunSecretProperty;
 
-    public String upload(MultipartFile file) {
+    public String upload(MultipartFile file) throws IOException {
         // 填写您的AccessKey信息。
         String accessKeyId = aliyunSecretProperty.getOssAccessKeyId();
         // 填写您的AccessKey Secret。
@@ -49,7 +49,7 @@ public class AliyunOSSUtil {
         StringBuilder fileURL = new StringBuilder();
         try {
             // bg.png -->png
-            if (file == null || file.getOriginalFilename() == null) {
+            if (file == null || file.getOriginalFilename() == null || file.getOriginalFilename().isEmpty()) {
                 throw new IOException("file is null");
             }
             // 文件类型        ps: getOriginalFilename()输出文件名-->abc.txt
@@ -87,7 +87,7 @@ public class AliyunOSSUtil {
                     + "such as not being able to access the network.");
             System.out.println("Error Message:" + ce.getMessage());
         } catch (IOException e) {
-            System.out.println("IOException" + e.getMessage());
+            throw new IOException(e);
         } finally {
             if (ossClient != null) {
                 ossClient.shutdown();

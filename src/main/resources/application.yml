@@ -9,7 +9,7 @@ spring:
     url: ${production.datasource.url}
     username: ${production.datasource.username}
     password: ${production.datasource.password}
-    driver-class-name: ${production.datasource.datasource.driver-class-name}
+    driver-class-name: ${production.datasource.driver-class-name}
 
   servlet:
     multipart:
@@ -31,3 +31,16 @@ blog:
     region: ${production.oss.region}
     oss-access-key-id: ${production.oss.oss-access-key-id}
     oss-access-key-secret: ${production.oss.oss-access-key-secret}
+
+# springdoc-openapi项目配置
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: '默认'
+      paths-to-match: '/**'
+      packages-to-scan: com.qiyuan.controller

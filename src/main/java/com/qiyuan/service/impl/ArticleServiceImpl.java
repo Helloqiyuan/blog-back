@@ -3,18 +3,23 @@ package com.qiyuan.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.qiyuan.constant.ArticleConstant;
+import com.qiyuan.dto.ArticlePageQueryDTO;
 import com.qiyuan.dto.pageQueryDTO;
 import com.qiyuan.exception.ArticleException;
 import com.qiyuan.mapper.ArticleMapper;
 import com.qiyuan.pojo.Article;
+import com.qiyuan.utils.MathUtil;
 import com.qiyuan.vo.PageResult;
 import com.qiyuan.service.ArticleService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
 @Service
+@Slf4j
 public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ArticleMapper articleMapper;
@@ -48,17 +53,19 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Article getArticleById(Integer id) {
-        Article article =  articleMapper.getArticleById(id);
+        Article article = articleMapper.getArticleById(id);
         if (article == null) {
             throw new ArticleException(ArticleConstant.ARTICLE_NOT_EXIST);
         }
+        article.setViewCount(article.getViewCount() + 1);
+        articleMapper.updateArticle(article);
         return article;
     }
 
     @Override
-    public PageResult<Article> pageQuery(pageQueryDTO pageQueryDTO) {
-        PageHelper.startPage(pageQueryDTO.getPage(), pageQueryDTO.getPageSize());
-        Page<Article> p = articleMapper.pageQuery();
+    public PageResult<Article> pageQuery(ArticlePageQueryDTO articlePageQueryDTO) {
+        PageHelper.startPage(articlePageQueryDTO.getPage(), articlePageQueryDTO.getPageSize());
+        Page<Article> p = articleMapper.pageQuery(articlePageQueryDTO);
         return new PageResult<>(p.getTotal(), p.getResult());
     }
 }

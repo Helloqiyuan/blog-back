@@ -26,7 +26,9 @@ public class Article implements Serializable {
 
     private Integer id;
     private String title;
+    private String subTitle;
     private String content;
+    private String cover;
     private Integer authorId;
     private Integer status;
     private Integer viewCount;

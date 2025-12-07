@@ -12,8 +12,9 @@ class OssTest {
     private AliyunSecretProperty aliyunSecretProperty;
     @Autowired
     private AliyunOSSUtil aliyunOSSUtil;
+
     @Test
-     void test(){
+    public void test() {
         System.out.println(aliyunSecretProperty.getOssAccessKeyId());
         System.out.println(aliyunSecretProperty.getOssAccessKeySecret());
     }
