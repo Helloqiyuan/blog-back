@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public Result handleException(Exception e){
-        log.warn("全局异常:{}",e.getMessage());
+        log.warn("全局异常:{}{}",e.getMessage(),e.getStackTrace());
         return Result.error(e.getMessage());
     }
 }

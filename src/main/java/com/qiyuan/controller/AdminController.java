@@ -1,6 +1,6 @@
 package com.qiyuan.controller;
 
-import com.qiyuan.annotation.Test;
+import com.qiyuan.annotation.MyTest;
 import com.qiyuan.pojo.Admin;
 import com.qiyuan.pojo.Result;
 import com.qiyuan.service.AdminService;
@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @RestController()
 @RequestMapping("/admin")
 @Slf4j
-@Tag(name = "管理员接口",description = "管理员接口")
+@Tag(name = "管理员相关")
 public class AdminController {
     @Autowired
     private AdminService adminService;
@@ -56,7 +56,7 @@ public class AdminController {
      * */
     @GetMapping("/time")
     @Operation(summary = "根据创建时间查询管理员")
-    @Test()
+    @MyTest()
     public Result getAdminByCreateTime(@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime createTime){
         log.info("查询管理员创建时间:{}",createTime);
         Admin admin = adminService.getAdminByCreateTime(createTime);

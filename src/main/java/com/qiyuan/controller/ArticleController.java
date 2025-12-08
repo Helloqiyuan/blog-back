@@ -1,11 +1,12 @@
 package com.qiyuan.controller;
 
 import com.qiyuan.dto.ArticlePageQueryDTO;
-import com.qiyuan.dto.pageQueryDTO;
 import com.qiyuan.pojo.Article;
 import com.qiyuan.vo.PageResult;
 import com.qiyuan.pojo.Result;
 import com.qiyuan.service.ArticleService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/article")
 @Slf4j
+@Tag(name = "文章接口")
 public class ArticleController {
     @Autowired
     private ArticleService articleService;
@@ -21,6 +23,7 @@ public class ArticleController {
      * 新增文章
      */
     @PostMapping()
+    @Operation(summary = "新增文章")
     public Result insertArticle(@RequestBody Article article) {
         log.info("新增文章:{}", article);
         articleService.insertArticle(article);
@@ -31,6 +34,7 @@ public class ArticleController {
      * 根据id删除文章
      */
     @DeleteMapping
+    @Operation(summary = "根据id删除文章")
     public Result deleteArticleById(@RequestParam Integer id) {
         log.info("删除文章:{}", id);
         articleService.deleteArticleById(id);
@@ -41,6 +45,7 @@ public class ArticleController {
      * 修改文章
      */
     @PutMapping
+    @Operation(summary = "修改文章")
     public Result updateArticle(@RequestBody Article article) {
         log.info("修改文章:{}", article);
         articleService.updateArticle(article);
@@ -51,6 +56,7 @@ public class ArticleController {
      * 根据id查询文章
      */
     @GetMapping
+    @Operation(summary = "根据id查询文章")
     public Result getArticleById(@RequestParam Integer id) {
         log.info("查询文章:{}", id);
         Article article = articleService.getArticleById(id);
@@ -61,6 +67,7 @@ public class ArticleController {
      * 分页查询文章
      */
     @GetMapping("/page")
+    @Operation(summary = "分页查询文章")
     public Result getArticleByPage(ArticlePageQueryDTO articlePageQueryDTO) {
         log.info("分页查询文章:{}", articlePageQueryDTO);
         PageResult<Article> articles = articleService.pageQuery(articlePageQueryDTO);
