@@ -36,4 +36,6 @@ knife4j:
   enable: false
   setting:
     language: zh_cn
+server:
+  port: 8080
 

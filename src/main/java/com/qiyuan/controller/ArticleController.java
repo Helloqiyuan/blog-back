@@ -83,7 +83,7 @@ public class ArticleController {
     /**
      * 文章图片的上传接口
      */
-    @PostMapping("/uploadImage")
+    @PostMapping("/upload")
     @Operation(summary = "文章图片的上传接口")
     public EditorResult uploadArticlePicture(MultipartFile file) {
         log.info("上传文章图片开始:{}", file.getOriginalFilename());
