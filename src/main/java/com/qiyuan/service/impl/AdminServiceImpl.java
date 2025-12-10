@@ -5,10 +5,13 @@ import com.qiyuan.exception.AdminException;
 import com.qiyuan.mapper.AdminMapper;
 import com.qiyuan.pojo.Admin;
 import com.qiyuan.service.AdminService;
+import com.qiyuan.utils.JwtUtil;
+import com.qiyuan.vo.LoginVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -55,5 +58,25 @@ public class AdminServiceImpl implements AdminService {
         if (i == 0) {
             throw new AdminException(AdminConstant.CAN_NOT_UPDATE_NOT_EXIST_ADMIN);
         }
+    }
+
+    @Override
+    public LoginVO login(Admin admin) {
+        Admin adm = adminMapper.getAdminByAccount(admin.getAccount());
+        if (adm == null) {
+            throw new AdminException(AdminConstant.ADMIN_NOT_EXIST);
+        }
+        if (!adm.getPassword().equals(admin.getPassword())) {
+            throw new AdminException(AdminConstant.PASSWORD_ERROR);
+        }
+        HashMap<String, Object> claims = new HashMap<>();
+        claims.put("account", adm.getAccount());
+        claims.put("password",adm.getPassword());
+        String token = JwtUtil.createJWT(claims);
+        return LoginVO
+                .builder()
+                .nickname(adm.getNickname())
+                .token(token)
+                .build();
     }
 }

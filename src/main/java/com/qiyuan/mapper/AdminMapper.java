@@ -1,9 +1,7 @@
 package com.qiyuan.mapper;
 
 import com.qiyuan.pojo.Admin;
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
 
 import java.time.LocalDateTime;
 
@@ -18,4 +16,6 @@ public interface AdminMapper {
     Admin getAdminByCreateTime(LocalDateTime createTime);
 
     Integer updateAdmin(Admin admin);
+
+    Admin getAdminByAccount(String account);
 }
