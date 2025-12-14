@@ -1,13 +1,14 @@
 package com.qiyuan.controller;
 
+
 import com.qiyuan.constant.UploadConstant;
 import com.qiyuan.dto.ArticlePageQueryDTO;
 import com.qiyuan.pojo.Article;
 import com.qiyuan.pojo.ArticlePicture;
-import com.qiyuan.pojo.EditorResult;
+import com.qiyuan.vo.EditorResult;
 import com.qiyuan.utils.AliyunOSSUtil;
 import com.qiyuan.vo.PageResult;
-import com.qiyuan.pojo.Result;
+import com.qiyuan.vo.Result;
 import com.qiyuan.service.ArticleService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -31,6 +32,7 @@ public class ArticleController {
      */
     @PostMapping()
     @Operation(summary = "新增文章")
+
     public Result insertArticle(@RequestBody Article article) {
         log.info("新增文章:{}", article);
         articleService.insertArticle(article);
@@ -42,6 +44,7 @@ public class ArticleController {
      */
     @DeleteMapping
     @Operation(summary = "根据id删除文章")
+
     public Result deleteArticleById(@RequestParam Integer id) {
         log.info("删除文章:{}", id);
         articleService.deleteArticleById(id);
@@ -53,6 +56,7 @@ public class ArticleController {
      */
     @PutMapping
     @Operation(summary = "修改文章")
+
     public Result updateArticle(@RequestBody Article article) {
         log.info("修改文章:{}", article);
         articleService.updateArticle(article);
@@ -64,6 +68,7 @@ public class ArticleController {
      */
     @GetMapping
     @Operation(summary = "根据id查询文章")
+
     public Result getArticleById(@RequestParam Integer id) {
         log.info("查询文章:{}", id);
         Article article = articleService.getArticleById(id);
@@ -75,6 +80,7 @@ public class ArticleController {
      */
     @GetMapping("/page")
     @Operation(summary = "分页查询文章")
+
     public Result getArticleByPage(ArticlePageQueryDTO articlePageQueryDTO) {
         log.info("分页查询文章:{}", articlePageQueryDTO);
         PageResult<Article> articles = articleService.pageQuery(articlePageQueryDTO);

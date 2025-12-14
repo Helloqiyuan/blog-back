@@ -1,11 +1,14 @@
-package com.qiyuan.pojo;
+package com.qiyuan.vo;
 
 import lombok.Data;
+
+import java.io.Serializable;
+
 /**
  * 结果
  * */
 @Data
-public class Result {
+public class Result implements Serializable {
     private Integer code;
     private Object data;
     private String message;

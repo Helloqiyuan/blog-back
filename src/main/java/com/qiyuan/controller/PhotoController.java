@@ -1,7 +1,7 @@
 package com.qiyuan.controller;
 
 import com.qiyuan.pojo.Photo;
-import com.qiyuan.pojo.Result;
+import com.qiyuan.vo.Result;
 import com.qiyuan.service.PhotoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

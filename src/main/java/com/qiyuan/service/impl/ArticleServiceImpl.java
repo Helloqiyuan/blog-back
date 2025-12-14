@@ -4,17 +4,17 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.qiyuan.constant.ArticleConstant;
 import com.qiyuan.dto.ArticlePageQueryDTO;
-import com.qiyuan.dto.pageQueryDTO;
 import com.qiyuan.exception.ArticleException;
 import com.qiyuan.mapper.ArticleMapper;
 import com.qiyuan.pojo.Article;
-import com.qiyuan.utils.MathUtil;
 import com.qiyuan.vo.PageResult;
 import com.qiyuan.service.ArticleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -25,6 +25,7 @@ public class ArticleServiceImpl implements ArticleService {
     private ArticleMapper articleMapper;
 
     @Override
+    @CacheEvict(value = "article_page_query", allEntries = true)
     public void insertArticle(Article article) {
         article.setAuthorId(1);
         article.setStatus(Article.DRAFT);
@@ -35,6 +36,12 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    @Caching(
+            evict = {
+                    @CacheEvict(value = "article", key = "#id"),
+                    @CacheEvict(value = "article_page_query", allEntries = true)
+            }
+    )
     public void deleteArticleById(Integer id) {
         Integer i = articleMapper.deleteArticleById(id);
         if (i == 0) {
@@ -43,6 +50,12 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    @Caching(
+            evict = {
+                    @CacheEvict(value = "article_page_query",allEntries = true),
+                    @CacheEvict(value = "article",key = "#article.id")
+            }
+    )
     public void updateArticle(Article article) {
         article.setUpdateTime(LocalDateTime.now());
         Integer i = articleMapper.updateArticle(article);
@@ -52,6 +65,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    @Cacheable(value = "article", key = "#id")
     public Article getArticleById(Integer id) {
         Article article = articleMapper.getArticleById(id);
         if (article == null) {
@@ -63,6 +77,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    @Cacheable(value = "article_page_query", key = "#articlePageQueryDTO.toString()")
     public PageResult<Article> pageQuery(ArticlePageQueryDTO articlePageQueryDTO) {
         PageHelper.startPage(articlePageQueryDTO.getPage(), articlePageQueryDTO.getPageSize());
         Page<Article> p = articleMapper.pageQuery(articlePageQueryDTO);

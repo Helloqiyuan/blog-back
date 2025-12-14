@@ -39,7 +39,7 @@ public class JwtUtil {
         return Jwts.builder()
                 .claims(claims)  // 设置自定义负载
                 .signWith(SECRET_KEY) // 设置签名密钥（默认 HS256）
-                .expiration(new Date(System.currentTimeMillis() + 1000 * 60)) // 设置过期时间（一天）
+                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24)) // 设置过期时间（一天）
                 .compact();
     }
 

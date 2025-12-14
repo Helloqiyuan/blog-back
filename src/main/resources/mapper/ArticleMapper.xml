@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qiyuan.mapper.ArticleMapper">
-    <insert id="insertArticle">
+    <insert id="insertArticle" useGeneratedKeys="true" keyProperty="id">
         insert into article(title,sub_title,content,cover,author_id,status,view_count,update_time,create_time)
         values(#{title},#{subTitle},#{content},#{cover},#{authorId},#{status},#{viewCount},#{updateTime},#{createTime})
     </insert>
@@ -60,8 +60,7 @@
         <where>
             <if test="searchContent != null">
                 title like concat('%',#{searchContent},'%') or
-                sub_title like concat('%',#{searchContent},'%') or
-                content like concat('%',#{searchContent},'%')
+                sub_title like concat('%',#{searchContent},'%')
             </if>
         </where>
     </select>

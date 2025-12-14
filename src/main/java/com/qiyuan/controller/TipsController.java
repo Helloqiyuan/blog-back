@@ -1,6 +1,6 @@
 package com.qiyuan.controller;
 
-import com.qiyuan.pojo.Result;
+import com.qiyuan.vo.Result;
 import com.qiyuan.pojo.Tips;
 import com.qiyuan.service.TipsService;
 import io.swagger.v3.oas.annotations.Operation;

@@ -1,6 +1,6 @@
 package com.qiyuan.handler;
 
-import com.qiyuan.pojo.Result;
+import com.qiyuan.vo.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

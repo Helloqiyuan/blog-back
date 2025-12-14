@@ -4,17 +4,22 @@ spring:
 
   profiles:
     active: dev  # 默认使用 dev 配置
-
   datasource:
     url: ${production.datasource.url}
     username: ${production.datasource.username}
     password: ${production.datasource.password}
-    driver-class-name: ${production.datasource.driver-class-name}
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   servlet:
     multipart:
-      max-file-size: ${production.servlet.multipart.max-file-size}
-      max-request-size: ${production.servlet.multipart.max-request-size}
+      max-file-size: 100MB
+      max-request-size: 500MB
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      password: ${production.data.redis.password}
+      database: 8
 
 # mybatis 公共配置
 mybatis:

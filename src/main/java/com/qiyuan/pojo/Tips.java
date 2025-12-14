@@ -3,10 +3,11 @@ package com.qiyuan.pojo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
-public class Tips {
+public class Tips implements Serializable {
     /**
      * 状态为启用
      * */

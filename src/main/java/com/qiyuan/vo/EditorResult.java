@@ -1,10 +1,12 @@
-package com.qiyuan.pojo;
+package com.qiyuan.vo;
 
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class EditorResult {
+public class EditorResult implements Serializable {
     private Integer errno;
     private Object data;
     public static EditorResult success(Object data){
