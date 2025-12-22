@@ -33,7 +33,7 @@ public class ArticleController {
     @PostMapping()
     @Operation(summary = "新增文章")
 
-    public Result insertArticle(@RequestBody Article article) {
+    public Result insert(@RequestBody Article article) {
         log.info("新增文章:{}", article);
         articleService.insertArticle(article);
         return Result.success();
@@ -45,7 +45,7 @@ public class ArticleController {
     @DeleteMapping
     @Operation(summary = "根据id删除文章")
 
-    public Result deleteArticleById(@RequestParam Integer id) {
+    public Result delete(@RequestParam Integer id) {
         log.info("删除文章:{}", id);
         articleService.deleteArticleById(id);
         return Result.success();
@@ -57,7 +57,7 @@ public class ArticleController {
     @PutMapping
     @Operation(summary = "修改文章")
 
-    public Result updateArticle(@RequestBody Article article) {
+    public Result update(@RequestBody Article article) {
         log.info("修改文章:{}", article);
         articleService.updateArticle(article);
         return Result.success();

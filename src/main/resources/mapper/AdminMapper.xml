@@ -58,4 +58,9 @@
         from admin
         where account = #{account}
     </select>
+    <select id="getAdminByNickname" resultType="com.qiyuan.pojo.Admin">
+        select *
+        from admin
+        where nickname = #{nickname}
+    </select>
 </mapper>

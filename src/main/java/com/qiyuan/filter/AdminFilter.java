@@ -1,6 +1,8 @@
 package com.qiyuan.filter;
 
 import com.qiyuan.utils.JwtUtil;
+import com.qiyuan.utils.ThreadLocalUtil;
+import io.jsonwebtoken.Claims;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
@@ -30,7 +32,9 @@ public class AdminFilter implements Filter {
             }
             token = token.split(" ")[1];
             try {
-                JwtUtil.parseJWT(token);
+                Claims claims = JwtUtil.parseJWT(token);
+                ThreadLocalUtil.set((Integer) claims.get("id"));
+                System.out.println("ThreadLocalUtil.get()" + ThreadLocalUtil.get());
             } catch (Exception e) {
                 log.warn("token Authorization failed");
                 response.setStatus(401);

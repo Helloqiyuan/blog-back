@@ -63,5 +63,19 @@
                 sub_title like concat('%',#{searchContent},'%')
             </if>
         </where>
+        <choose>
+            <when test="sortType == 0">
+                order by view_count desc
+            </when>
+            <when test="sortType == 1">
+                order by update_time desc
+            </when>
+            <when test="sortType == 2">
+                order by create_time desc
+            </when>
+            <otherwise>
+                order by id desc <!-- 默认排序，防止分页顺序不确定 -->
+            </otherwise>
+        </choose>
     </select>
 </mapper>

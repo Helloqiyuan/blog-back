@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiyuan.mapper.LogMapper">
+
+    <insert id="insertLog" useGeneratedKeys="true" keyProperty="id">
+        insert into log(operate_admin_id, operate_time, class_name, method_name, method_params, return_value, cost_time)
+        VALUES (#{operateAdminId}, #{operateTime}, #{className}, #{methodName}, #{methodParams}, #{returnValue},
+                #{costTime})
+    </insert>
+    <select id="page" resultType="com.qiyuan.pojo.Log">
+        select l.*,a.nickname as operate_nickname from log l left join admin a on l.operate_admin_id = a.id
+        <where>
+            <if test="operateNickname != null and operateNickname != ''">
+                a.nickname like concat('%',#{operateNickname},'%')
+            </if>
+            <if test="startTime != null and endTime != null">
+                and l.operate_time between #{startTime} and #{endTime}
+            </if>
+            <if test="startTime != null and endTime == null">
+                and l.operate_time &gt;= #{startTime}
+            </if>
+            <if test="startTime == null and endTime != null">
+                and l.operate_time &lt;= #{endTime}
+            </if>
+            <if test="type == 0">
+                and l.method_name not like 'login'
+            </if>
+            <if test="type == 1">
+                and l.method_name like 'login'
+            </if>
+        </where>
+        order by l.operate_time desc
+    </select>
+</mapper>

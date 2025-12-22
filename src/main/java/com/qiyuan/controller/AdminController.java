@@ -1,5 +1,6 @@
 package com.qiyuan.controller;
 
+import com.qiyuan.annotation.Log;
 import com.qiyuan.annotation.MyTest;
 import com.qiyuan.pojo.Admin;
 import com.qiyuan.vo.Result;
@@ -39,7 +40,7 @@ public class AdminController {
      */
     @PostMapping
     @Operation(summary = "新增管理员")
-    public Result insertAdmin(@RequestBody Admin admin) {
+    public Result insert(@RequestBody Admin admin) {
         log.info("新增管理员:{}", admin);
         adminService.insertAdmin(admin);
         return Result.success();
@@ -50,7 +51,7 @@ public class AdminController {
      */
     @DeleteMapping
     @Operation(summary = "根据id删除管理员")
-    public Result deleteAdminById(@RequestParam Integer id) {
+    public Result delete(@RequestParam Integer id) {
         log.info("删除管理员:{}", id);
         adminService.deleteAdminById(id);
         return Result.success();
@@ -73,7 +74,7 @@ public class AdminController {
      */
     @PutMapping
     @Operation(summary = "更新管理员")
-    public Result updateAdmin(@RequestBody Admin admin) {
+    public Result update(@RequestBody Admin admin) {
         log.info("更新管理员:{}", admin);
         adminService.updateAdmin(admin);
         return Result.success();
@@ -84,6 +85,7 @@ public class AdminController {
      */
     @PostMapping("/login")
     @Operation(summary = "登录")
+    @Log
     public Result login(@RequestBody Admin admin) {
         log.info("登录:{}", admin);
         LoginVO res = adminService.login(admin);

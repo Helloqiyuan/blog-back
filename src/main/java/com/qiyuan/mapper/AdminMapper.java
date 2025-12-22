@@ -14,6 +14,7 @@ public interface AdminMapper {
     Integer deleteAdminById(Integer id);
 
     Admin getAdminByCreateTime(LocalDateTime createTime);
+    Admin getAdminByNickname(String nickname);
 
     Integer updateAdmin(Admin admin);
 

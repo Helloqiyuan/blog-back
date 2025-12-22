@@ -6,6 +6,7 @@ import com.qiyuan.mapper.AdminMapper;
 import com.qiyuan.pojo.Admin;
 import com.qiyuan.service.AdminService;
 import com.qiyuan.utils.JwtUtil;
+import com.qiyuan.utils.ThreadLocalUtil;
 import com.qiyuan.vo.LoginVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -70,13 +71,19 @@ public class AdminServiceImpl implements AdminService {
             throw new AdminException(AdminConstant.PASSWORD_ERROR);
         }
         HashMap<String, Object> claims = new HashMap<>();
+//        用于记录登录日志
+        ThreadLocalUtil.set(adm.getId());
+
+        claims.put("id", adm.getId());
         claims.put("account", adm.getAccount());
         claims.put("password",adm.getPassword());
         String token = JwtUtil.createJWT(claims);
         return LoginVO
                 .builder()
+                .id(adm.getId())
                 .nickname(adm.getNickname())
                 .token(token)
+                .exp(System.currentTimeMillis() + 1000 * 60 * 60 * 24 + "")
                 .build();
     }
 }

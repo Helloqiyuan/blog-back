@@ -16,8 +16,8 @@ spring:
       max-request-size: 500MB
   data:
     redis:
-      host: 127.0.0.1
-      port: 6379
+      host: ${production.data.redis.host}
+      port: ${production.data.redis.port}
       password: ${production.data.redis.password}
       database: 8
 

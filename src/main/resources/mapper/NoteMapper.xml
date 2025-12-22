@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiyuan.mapper.NoteMapper">
+
+    <insert id="insertNote">
+        insert into note(type_id,content,update_time,create_time)
+        values(#{typeId},#{content},#{updateTime},#{createTime})
+    </insert>
+    <delete id="deleteNoteById">
+        delete
+        from note
+        where id = #{id}
+    </delete>
+    <update id="updateNote">
+        update note
+        set
+        <if test="typeId != null">
+            type_id = #{typeId},
+        </if>
+        <if test="content != null">
+            content = #{content},
+        </if>
+        <if test="updateTime != null">
+            update_time = #{updateTime}
+        </if>
+        where id = #{id}
+    </update>
+    <select id="getAllNotes" resultType="com.qiyuan.pojo.Note">
+        select n.*,nt.name as type_name
+        from note n left join note_type nt on n.type_id = nt.id
+    </select>
+    <select id="getNoteById" resultType="com.qiyuan.pojo.Note">
+        select n.*,nt.name as type_name
+        from note n left join note_type nt on n.type_id = nt.id
+        where n.id = #{id}
+    </select>
+    <select id="pageQuery" resultType="com.qiyuan.pojo.Note">
+        select n.*,nt.name as type_name
+        from note n left join note_type nt on n.type_id = nt.id
+        where n.content like concat('%',#{content},'%')
+        <if test="typeId != -1">
+            and n.type_id = #{typeId}
+        </if>
+    </select>
+</mapper>

@@ -24,7 +24,7 @@ public class TipsController {
      */
     @PostMapping
     @Operation(summary = "新增提示")
-    public Result insertTips(@RequestBody Tips tips) {
+    public Result insert(@RequestBody Tips tips) {
         log.info("新增提示:{}", tips);
         tipsService.insertTips(tips);
         return Result.success();
@@ -35,7 +35,7 @@ public class TipsController {
      */
     @DeleteMapping
     @Operation(summary = "删除提示")
-    public Result deleteTips(@RequestParam Integer id) {
+    public Result delete(@RequestParam Integer id) {
         log.info("删除提示:{}", id);
         tipsService.deleteTips(id);
         return Result.success();
@@ -57,7 +57,7 @@ public class TipsController {
      */
     @PutMapping
     @Operation(summary = "更新提示")
-    public Result updateTips(@RequestBody Tips tips) {
+    public Result update(@RequestBody Tips tips) {
         log.info("更新提示:{}", tips);
         tipsService.updateTips(tips);
         return Result.success();
