@@ -1,7 +1,6 @@
 package com.qiyuan.controller;
 
 import com.qiyuan.annotation.Log;
-import com.qiyuan.annotation.MyTest;
 import com.qiyuan.pojo.Admin;
 import com.qiyuan.vo.Result;
 import com.qiyuan.service.AdminService;
@@ -62,7 +61,6 @@ public class AdminController {
      */
     @GetMapping("/time")
     @Operation(summary = "根据创建时间查询管理员")
-    @MyTest()
     public Result getAdminByCreateTime(@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime createTime) {
         log.info("查询管理员创建时间:{}", createTime);
         Admin admin = adminService.getAdminByCreateTime(createTime);

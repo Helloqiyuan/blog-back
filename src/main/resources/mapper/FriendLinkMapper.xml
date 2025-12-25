@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiyuan.mapper.FriendLinkMapper">
+
+    <insert id="insertFriendLink">
+        insert into friend_link(name, url, img, description, author_email, status, update_time, create_time)
+        values (#{name}, #{url}, #{img}, #{description}, #{authorEmail}, #{status}, #{updateTime}, #{createTime})
+    </insert>
+
+    <select id="getAllFriendLink" resultType="com.qiyuan.pojo.FriendLink">
+        select *
+        from friend_link
+        order by create_time desc
+    </select>
+
+    <delete id="deleteFriendLinkById">
+        delete
+        from friend_link
+        where id = #{id}
+    </delete>
+
+    <select id="getFriendLinkById" resultType="com.qiyuan.pojo.FriendLink">
+        select *
+        from friend_link
+        where id = #{id}
+    </select>
+    <select id="getEnableFriendLink" resultType="com.qiyuan.pojo.FriendLink">
+        select *
+        from friend_link
+        where status = 1
+    </select>
+
+    <update id="updateFriendLink">
+        update friend_link
+        set
+        <if test="name != null and name != ''">name = #{name},</if>
+        <if test="url != null and  url != ''">url = #{url},</if>
+        <if test="img != null and img != ''">img = #{img},</if>
+        <if test="description != null and description != ''">description = #{description},</if>
+        <if test="authorEmail != null and authorEmail != '' ">author_email = #{authorEmail},</if>
+        <if test="status != null">status = #{status},</if>
+        <if test="updateTime != null">update_time = #{updateTime}</if>
+        where id = #{id}
+    </update>
+
+</mapper>
+

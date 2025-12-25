@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/upload")
 @Slf4j
 @Tag(name = "上传接口")
-public class uploadController {
+public class UploadController {
     @Autowired
     private AliyunOSSUtil aliyunOSSUtil;
 

@@ -21,6 +21,26 @@ spring:
       password: ${production.data.redis.password}
       database: 8
 
+  mail:
+    host: smtp.qq.com
+    username: 3302663850@qq.com
+    password: sevspjetfuvjcieh
+    port: 465
+    protocol: smtp
+    default-encoding: utf-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          ssl:
+            enable: true
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+
 # mybatis 公共配置
 mybatis:
   mapper-locations: classpath:mapper/*.xml

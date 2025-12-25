@@ -30,6 +30,7 @@
     <select id="getAllNotes" resultType="com.qiyuan.pojo.Note">
         select n.*,nt.name as type_name
         from note n left join note_type nt on n.type_id = nt.id
+        order by n.create_time desc
     </select>
     <select id="getNoteById" resultType="com.qiyuan.pojo.Note">
         select n.*,nt.name as type_name
@@ -43,5 +44,6 @@
         <if test="typeId != -1">
             and n.type_id = #{typeId}
         </if>
+        order by n.create_time desc
     </select>
 </mapper>

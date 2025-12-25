@@ -19,11 +19,12 @@ public class AdminFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-        log.info("{} {}{}", request.getMethod(), request.getRequestURL(), request.getQueryString() == null ? "" : "?" + request.getQueryString());
+        String requestURI = request.getRequestURI();
+        String requestMethod = request.getMethod();
+        log.info("{} {}{}", requestMethod, request.getRequestURL(), request.getQueryString() == null ? "" : "?" + request.getQueryString());
 
-        List<String> requestMethods = List.of("POST", "PUT", "DELETE");
 //        存在需要权限的请求方法时，进行权限校验
-        if (requestMethods.contains(request.getMethod()) && !"/admin/login".equals(request.getRequestURI())) {
+        if (isNeedLogin(requestURI, requestMethod)) {
             String token = request.getHeader("Authorization");
             if (token == null) {
                 response.setStatus(401);
@@ -42,5 +43,21 @@ public class AdminFilter implements Filter {
             }
         }
         filterChain.doFilter(request, response);
+    }
+
+    private boolean isNeedLogin(String uri, String method) {
+        List<String> needLoginMethods = List.of("POST", "PUT", "DELETE");
+//        新增友链不需要登录
+        if ("/friendLink".equals(uri) && "POST".equals(method)) {
+            return false;
+        }
+//        登录不需要登录
+        if ("/admin/login".equals(uri)) {
+            return false;
+        }
+        if (needLoginMethods.contains(method)) {
+            return true;
+        }
+        return false;
     }
 }

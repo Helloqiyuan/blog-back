@@ -1,10 +1,11 @@
-package com.qiyuan.service;
+package com.qiyuan.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.qiyuan.dto.LogPageQueryDTO;
 import com.qiyuan.mapper.LogMapper;
 import com.qiyuan.pojo.Log;
+import com.qiyuan.service.LogService;
 import com.qiyuan.vo.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
