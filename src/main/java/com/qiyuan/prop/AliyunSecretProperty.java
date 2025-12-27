@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Data
 @Component
-@ConfigurationProperties(prefix = "blog.oss")
+@ConfigurationProperties(prefix = "oss")
 public class AliyunSecretProperty {
     private String endpoint;
     private String bucketName;

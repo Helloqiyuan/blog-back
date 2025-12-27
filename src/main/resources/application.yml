@@ -5,7 +5,7 @@ spring:
   profiles:
     active: dev  # 默认使用 dev 配置
   datasource:
-    url: ${production.datasource.url}
+    url: jdbc:mysql://${production.datasource.domain}:${production.datasource.port}/${production.datasource.database}?useSSL=false&serverTimezone=Asia/Shanghai&useLegacyDatetimeCode=false&characterEncoding=utf8
     username: ${production.datasource.username}
     password: ${production.datasource.password}
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -22,9 +22,11 @@ spring:
       database: 8
 
   mail:
-    host: smtp.qq.com
-    username: 3302663850@qq.com
-    password: sevspjetfuvjcieh
+    host: ${production.mail.host}
+    username: ${production.mail.username}
+    # 显示在发件人上的名称(这个是自定义的字段,spring不会读取)
+    from-name: ${production.mail.from-name}
+    password: ${production.mail.password}
     port: 465
     protocol: smtp
     default-encoding: utf-8
@@ -49,13 +51,12 @@ mybatis:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 # OSS 公共配置，占位引用 dev
-blog:
-  oss:
-    endpoint: ${production.oss.endpoint}
-    bucket-name: ${production.oss.bucket-name}
-    region: ${production.oss.region}
-    oss-access-key-id: ${production.oss.oss-access-key-id}
-    oss-access-key-secret: ${production.oss.oss-access-key-secret}
+oss:
+  endpoint: ${production.oss.endpoint}
+  bucket-name: ${production.oss.bucket-name}
+  region: ${production.oss.region}
+  oss-access-key-id: ${production.oss.oss-access-key-id}
+  oss-access-key-secret: ${production.oss.oss-access-key-secret}
 
 knife4j:
   enable: false

@@ -3,6 +3,8 @@ package com.qiyuan.mapper;
 import com.qiyuan.pojo.Photo;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface PhotoMapper {
     /**
@@ -11,4 +13,14 @@ public interface PhotoMapper {
     Photo getPhotoRandom(Integer rand);
 
     Integer getPhotoTotalCount();
+
+    void insert(Photo photo);
+    
+    Integer deleteById(Integer id);
+    
+    Photo selectById(Integer id);
+    
+    Integer update(Photo photo);
+
+    List<Photo> getAllPhotos();
 }

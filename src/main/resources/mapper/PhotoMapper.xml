@@ -6,12 +6,37 @@
 
 
     <select id="getPhotoRandom" resultType="com.qiyuan.pojo.Photo">
-        select *
-        from photo
+        select p.*,pt.name as type_name
+        from photo p left join photo_type pt on p.type_id = pt.id
         limit #{rand},1
     </select>
     <select id="getPhotoTotalCount" resultType="java.lang.Integer">
         select count(*)
         from photo
+    </select>
+    <select id="selectById" resultType="com.qiyuan.pojo.Photo">
+        select p.*,pt.name as type_name
+        from photo p left join photo_type pt on p.type_id = pt.id
+        where p.id = #{typeId}
+    </select>
+    <insert id="insert">
+        insert into photo(url, type_id,create_time)
+        values(#{url}, #{typeId},#{createTime})
+    </insert>
+    <update id="update">
+        update photo
+        set
+        <if test="updateTime != null">update_time = #{updateTime},</if>
+        <if test="url != null and url != ''">url = #{url},</if>
+        <if test="typeId != null">type_id = #{typeId}</if>
+        where id = #{id}
+    </update>
+    <delete id="deleteById">
+        delete from photo
+        where id = #{id}
+    </delete>
+    <select id="getAllPhotos" resultType="com.qiyuan.pojo.Photo">
+        select p.*,pt.name as type_name
+        from photo p left join photo_type pt on p.type_id = pt.id
     </select>
 </mapper>

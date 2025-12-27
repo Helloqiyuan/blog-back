@@ -4,6 +4,7 @@ import com.qiyuan.pojo.FriendLink;
 import com.qiyuan.service.FriendLinkService;
 import com.qiyuan.vo.Result;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/friendLink")
 @Slf4j
+@Tag(name = "友链接口")
 public class FriendLinkController {
     @Autowired
     private FriendLinkService friendLinkService;

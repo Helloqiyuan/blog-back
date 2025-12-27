@@ -3,6 +3,7 @@ package com.qiyuan.service.impl;
 import com.qiyuan.mapper.FriendLinkMapper;
 import com.qiyuan.pojo.FriendLink;
 import com.qiyuan.service.FriendLinkService;
+import com.qiyuan.utils.FileUtil;
 import com.qiyuan.utils.MailUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,8 +50,8 @@ public class FriendLinkServiceImpl implements FriendLinkService {
     @Override
     public void updateFriendLink(FriendLink friendLink) {
         if (Objects.equals(friendLink.getStatus(), FriendLink.ENABLE)) {
-            mailUtil.sendEmail(friendLink.getAuthorEmail(), "友链申请通过通知",
-                    "您好，您的友链 " + friendLink.getName() + " 申请已通过审核，感谢您的支持！");
+            mailUtil.sendEmail(friendLink.getAuthorEmail(), FileUtil.readMailTitleFile(),
+                    FileUtil.readMailContentFile(friendLink.getName()));
         }
         friendLink.setUpdateTime(LocalDateTime.now());
         friendLinkMapper.updateFriendLink(friendLink);
