@@ -83,7 +83,7 @@ public class AdminServiceImpl implements AdminService {
                 .id(adm.getId())
                 .nickname(adm.getNickname())
                 .token(token)
-                .exp(System.currentTimeMillis() + 1000 * 60 * 60 * 24 + "")
+                .exp(JwtUtil.EXP)
                 .build();
     }
 }

@@ -1,4 +1,4 @@
-package com.qiyuan.controller;
+package com.qiyuan.controller.common;
 
 import com.qiyuan.pojo.NoteType;
 import com.qiyuan.service.NoteTypeService;
@@ -14,13 +14,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/notetype")
+@RestController("commonNoteTypeController")
+@RequestMapping("/common/notetype")
 @Slf4j
 @Tag(name = "随笔类型接口")
 public class NoteTypeController {
     @Autowired
     private NoteTypeService noteTypeService;
+
+    /**
+     * 查询笔记类型
+     * @param id 笔记类型ID
+     */
     @GetMapping
     @Operation(summary = "查询笔记类型")
     public Result getNoteTypeById(@RequestParam Integer id) {

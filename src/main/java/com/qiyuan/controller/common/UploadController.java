@@ -1,4 +1,4 @@
-package com.qiyuan.controller;
+package com.qiyuan.controller.common;
 
 import com.qiyuan.constant.UploadConstant;
 import com.qiyuan.vo.Result;
@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-@RestController
-@RequestMapping("/upload")
+@RestController("commonUploadController")
+@RequestMapping("/common/upload")
 @Slf4j
 @Tag(name = "上传接口")
 public class UploadController {

@@ -64,13 +64,17 @@ public class FileUtil {
         }
         return res;
     }
+    public static String readFile(String fileName) {
+        return readFile(fileName, Map.of());
+    }
 
 
 
     public static String readMailContentFile(String friendLink) {
-        return readFile("mail-content.txt", Map.of("friend-link",friendLink));
+        return readFile("friend-link-content.txt", Map.of("friend-link",friendLink));
     }
-    public static String readMailTitleFile(){
-        return readFile("mail-title.txt", Map.of());
+
+    public static String readExpContentFile(String exp){
+        return readFile("exp-content.txt", Map.of("code",exp));
     }
 }

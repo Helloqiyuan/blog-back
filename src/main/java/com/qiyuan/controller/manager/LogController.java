@@ -1,4 +1,4 @@
-package com.qiyuan.controller;
+package com.qiyuan.controller.manager;
 
 import com.qiyuan.dto.LogPageQueryDTO;
 import com.qiyuan.pojo.Log;
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/log")
+@RestController("managerLogController")
+@RequestMapping("/manager/log")
 @Slf4j
 @Tag(name = "日志接口")
 public class LogController {

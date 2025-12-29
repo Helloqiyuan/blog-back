@@ -1,9 +1,9 @@
-package com.qiyuan.controller;
+package com.qiyuan.controller.manager;
 
 import com.qiyuan.pojo.Photo;
 import com.qiyuan.pojo.PhotoType;
-import com.qiyuan.vo.Result;
 import com.qiyuan.service.PhotoService;
+import com.qiyuan.vo.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -12,24 +12,15 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/photo")
+@RestController("managerPhotoController")
+@RequestMapping("/manager/photo")
 @Slf4j
 @Tag(name = "英雄图片接口")
 public class PhotoController {
     @Autowired
     private PhotoService photoService;
 
-    /**
-     * 随机获取一张英雄图片
-     * */
-    @GetMapping("/random")
-    @Operation(summary = "随机获取一张英雄图片")
-    public Result getPhotoRandom() {
-        log.info("随机获取一张英雄图片");
-        Photo photo = photoService.getPhotoRandom();
-        return Result.success(photo);
-    }
+
     /**
      * 获取所有英雄图片
      */

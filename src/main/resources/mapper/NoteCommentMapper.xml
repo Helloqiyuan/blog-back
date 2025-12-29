@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiyuan.mapper.NoteCommentMapper">
+    <insert id="insert">
+        insert into note_comment(note_id, user_id, parent_comment_id, content, update_time, create_time)
+        values (#{noteId}, #{userId}, #{parentCommentId}, #{content}, #{updateTime}, #{createTime})
+    </insert>
+    <update id="update">
+        update note_comment
+        <set>
+            <if test="content != null">
+                content = #{content},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </set>
+    </update>
+    <delete id="deleteById">
+        delete from note_comment
+        where id = #{id}
+    </delete>
+
+    <select id="getByNoteId" resultType="com.qiyuan.pojo.NoteComment">
+        select *
+        from note_comment
+        where note_id = #{noteId}
+        order by parent_comment_id
+    </select>
+</mapper>

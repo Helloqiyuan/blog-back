@@ -50,7 +50,7 @@ public class FriendLinkServiceImpl implements FriendLinkService {
     @Override
     public void updateFriendLink(FriendLink friendLink) {
         if (Objects.equals(friendLink.getStatus(), FriendLink.ENABLE)) {
-            mailUtil.sendEmail(friendLink.getAuthorEmail(), FileUtil.readMailTitleFile(),
+            mailUtil.sendEmail(friendLink.getAuthorEmail(), FileUtil.readFile("mail-title.txt"),
                     FileUtil.readMailContentFile(friendLink.getName()));
         }
         friendLink.setUpdateTime(LocalDateTime.now());
