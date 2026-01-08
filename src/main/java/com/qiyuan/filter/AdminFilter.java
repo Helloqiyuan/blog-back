@@ -21,15 +21,15 @@ public class AdminFilter implements Filter {
         log.info("{} {}{}", request.getMethod(), request.getRequestURL(), request.getQueryString() == null ? "" : "?" + request.getQueryString());
         String uri = request.getRequestURI();
         //        存在需要权限的请求方法时，进行权限校验
-        if (uri.startsWith("/manager")) {
+        if (uri.startsWith("/manager") || uri.startsWith("/user")) {
             String token = request.getHeader("Authorization");
             if (token == null) {
                 response.setStatus(401);
                 log.warn("token is null");
                 return;
             }
-            token = token.split(" ")[1];
             try {
+                token = token.split(" ")[1];
                 Claims claims = JwtUtil.parseJWT(token);
                 ThreadLocalUtil.set((Integer) claims.get("id"));
             } catch (Exception e) {

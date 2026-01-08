@@ -1,6 +1,6 @@
 package com.qiyuan.controller.user;
 
-import com.qiyuan.pojo.CommentNode;
+
 import com.qiyuan.pojo.NoteComment;
 import com.qiyuan.service.NoteCommentService;
 import com.qiyuan.vo.Result;
@@ -18,16 +18,6 @@ public class NoteCommentController {
     @Autowired
     private NoteCommentService noteCommentService;
     /**
-     * 根据随笔ID查询评论
-     */
-    @GetMapping()
-    @Operation(summary = "根据随笔ID查询评论")
-    public Result getByNoteId(@RequestParam Integer noteId) {
-        log.info("查询随笔评论:{}", noteId);
-        CommentNode<NoteComment> res = noteCommentService.getByNoteId(noteId);
-        return Result.success(res);
-    }
-    /**
      * 新增评论
      */
     @PostMapping()
@@ -44,7 +34,7 @@ public class NoteCommentController {
     @Operation(summary = "修改评论")
     public Result update(@RequestBody NoteComment noteComment) {
         log.info("修改评论:{}", noteComment);
-        noteCommentService.update(noteComment);
+//        noteCommentService.update(noteComment);
         return Result.success();
     }
     /**

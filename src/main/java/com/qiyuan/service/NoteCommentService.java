@@ -9,4 +9,6 @@ public interface NoteCommentService {
     CommentNode<NoteComment> getByNoteId(Integer noteId);
 
     void delete(Integer id);
+
+    NoteComment getByIdOnly(Integer id);
 }

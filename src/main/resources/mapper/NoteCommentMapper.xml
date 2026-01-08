@@ -3,13 +3,16 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qiyuan.mapper.NoteCommentMapper">
-    <insert id="insert">
-        insert into note_comment(note_id, user_id, parent_comment_id, content, update_time, create_time)
-        values (#{noteId}, #{userId}, #{parentCommentId}, #{content}, #{updateTime}, #{createTime})
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into note_comment(note_id, user_id, parent_comment_id,root_comment_id, content, update_time, create_time)
+        values (#{noteId}, #{userId}, #{parentCommentId}, #{rootCommentId},#{content}, #{updateTime}, #{createTime})
     </insert>
     <update id="update">
         update note_comment
         <set>
+            <if test="rootCommentId != null">
+                root_comment_id = #{rootCommentId},
+            </if>
             <if test="content != null">
                 content = #{content},
             </if>
@@ -17,16 +20,35 @@
                 update_time = #{updateTime},
             </if>
         </set>
+        where id = #{id}
     </update>
     <delete id="deleteById">
         delete from note_comment
         where id = #{id}
     </delete>
+    <delete id="deleteBatch">
+        delete from note_comment
+        where id in
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 
     <select id="getByNoteId" resultType="com.qiyuan.pojo.NoteComment">
+        select nc.*, u.username as username
+        from note_comment nc left join user u on nc.user_id = u.id
+        where note_id = #{noteId}
+        order by parent_comment_id
+    </select>
+    <select id="getById" resultType="com.qiyuan.pojo.NoteComment">
+        select * from note_comment
+        where id = #{id}
+    </select>
+    <select id="getByNoteIdAndRootId" resultType="com.qiyuan.pojo.NoteComment">
         select *
         from note_comment
         where note_id = #{noteId}
+          and root_comment_id = #{rootId}
         order by parent_comment_id
     </select>
 </mapper>

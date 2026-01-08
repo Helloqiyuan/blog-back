@@ -11,13 +11,18 @@ public class NoteComment {
      * 根评论
      */
     public static final Integer ROOT_COMMENT_ID = -1;
+
     private Integer id;
     private Integer noteId;
     private Integer userId;
     private Integer parentCommentId;
+    private Integer rootCommentId;
     private String content;
+    private Integer like;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime updateTime;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime createTime;
+
+    private String username;
 }
