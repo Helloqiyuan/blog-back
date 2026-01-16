@@ -16,7 +16,6 @@ import java.util.Map;
  * 使用 HMAC-SHA 系列算法进行签名验证。
  */
 public class JwtUtil {
-    public static final String EXP = System.currentTimeMillis() + 1000 * 60 * 60 * 24 + "";
 
     /**
      * JWT 密钥字符串（长度必须 ≥ 32 字节）

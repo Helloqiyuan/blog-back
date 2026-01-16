@@ -11,4 +11,10 @@ public class MathUtil {
     public static int getRandomInt(int min, int max) {
         return (int) (Math.random() * (max - min + 1) + min);
     }
+    /**
+     * 获取一天后的时间戳
+     */
+    public static long getTimestampOfOneDayLater() {
+        return System.currentTimeMillis() + 1000 * 60 * 60 * 24;
+    }
 }

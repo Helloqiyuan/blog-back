@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService {
                 .id(u.getId())
                 .username(u.getUsername())
                 .token(token)
-                .exp(JwtUtil.EXP)
+                .exp(MathUtil.getTimestampOfOneDayLater() + "")
                 .build();
     }
 

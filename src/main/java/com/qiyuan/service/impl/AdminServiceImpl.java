@@ -6,6 +6,7 @@ import com.qiyuan.mapper.AdminMapper;
 import com.qiyuan.pojo.Admin;
 import com.qiyuan.service.AdminService;
 import com.qiyuan.utils.JwtUtil;
+import com.qiyuan.utils.MathUtil;
 import com.qiyuan.utils.ThreadLocalUtil;
 import com.qiyuan.vo.LoginVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,7 +84,7 @@ public class AdminServiceImpl implements AdminService {
                 .id(adm.getId())
                 .nickname(adm.getNickname())
                 .token(token)
-                .exp(JwtUtil.EXP)
+                .exp(MathUtil.getTimestampOfOneDayLater() + "")
                 .build();
     }
 }
